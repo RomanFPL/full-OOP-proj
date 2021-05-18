@@ -2843,39 +2843,21 @@ function () {
 
   _createClass(Diff, [{
     key: "bindTriggers",
-    value: function bindTriggers() {
-      var _this = this;
-
-      this.oldOfficer.querySelector('.plus').addEventListener('click', function () {
-        if (_this.oldCounter !== _this.oldItems.length - 2) {
-          _this.oldItems[_this.oldCounter].style.display = 'flex';
-          _this.oldCounter++;
+    value: function bindTriggers(container, items, counter) {
+      container.querySelector('.plus').addEventListener('click', function () {
+        if (counter !== items.length - 2) {
+          items[counter].style.display = 'flex';
+          counter++;
         } else {
-          _this.oldItems[_this.oldCounter].style.display = 'flex';
-
-          _this.oldItems[_this.oldItems.length - 1].remove();
-        }
-      });
-      this.newOfficer.querySelector('.plus').addEventListener('click', function () {
-        if (_this.newCounter !== _this.newItems.length - 2) {
-          _this.newItems[_this.newCounter].style.display = 'flex';
-          _this.newCounter++;
-        } else {
-          _this.newItems[_this.newCounter].style.display = 'flex';
-
-          _this.newItems[_this.newItems.length - 1].remove();
+          items[counter].style.display = 'flex';
+          items[items.length - 1].remove();
         }
       });
     }
   }, {
     key: "hideItems",
-    value: function hideItems() {
-      this.oldItems.forEach(function (item, i, arr) {
-        if (i !== arr.length - 1) {
-          item.style.display = "none";
-        }
-      });
-      this.newItems.forEach(function (item, i, arr) {
+    value: function hideItems(items) {
+      items.forEach(function (item, i, arr) {
         if (i !== arr.length - 1) {
           item.style.display = "none";
         }
@@ -2884,8 +2866,10 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      this.hideItems();
-      this.bindTriggers();
+      this.hideItems(this.oldItems);
+      this.hideItems(this.newItems);
+      this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
+      this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
     }
   }]);
 
