@@ -2,6 +2,7 @@
 import MainSlider from './modules/sliders/slider-main';
 import MiniSlider from './modules/sliders/slider-mini';
 import VideoPlayer from './modules/playVideo';
+import Diff from './modules/diff';
 
 window.addEventListener('DOMContentLoaded', () => {
     const slider = new MainSlider({container :'.page', btns :'.next'});
@@ -37,4 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const player = new VideoPlayer('.showup .play', '.overlay');
     player.init();
+
+    new Diff('.officerold', '.officernew', '.officer__card-item').init();
+
 });
